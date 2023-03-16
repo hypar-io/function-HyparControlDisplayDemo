@@ -1,0 +1,64 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "77fa4240-9da8-4dce-9402-44a7af68ae65",
+  "name": "Hypar Control Display Demo",
+  "description": "The HyparControlDisplayDemo function.",
+  "language": "C#",
+  "overrides": {
+    "Profiles": {
+      "context": "[*discriminator=Elements.DemoElement]",
+      "identity": {
+        "Add Id": {
+          "type": "string"
+        }
+      },
+      "perProperty": true,
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Profile": {
+              "$hyparControlDisplay": {
+                "label": "Label",
+                "colorScheme": "DemoColorScheme"
+              },
+              "$ref": "https://prod-api.hypar.io/schemas/Profile"
+            },
+            "Label": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "$hyparAutocompleteQuery": {
+                "selfDependency": true,
+                "query": "[discriminator=Elements.AllowedLabels].Labels"
+              }
+            }
+          }
+        },
+        "remove": true
+      },
+      "schema": {
+        "Profile": {
+          "$ref": "https://prod-api.hypar.io/schemas/Profile",
+          "$hyparControlDisplay": {
+            "label": "Label",
+            "colorScheme": "DemoColorScheme"
+          }
+        },
+        "Label": {
+          "type": "string",
+          "$hyparAutocompleteQuery": {
+            "selfDependency": true,
+            "query": "[discriminator=Elements.AllowedLabels].Labels"
+          }
+        }
+      }
+    }
+  },
+  "element_types": [
+    "https://schemas.hypar.io/ColorScheme.json"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "last_updated": "0001-01-01T00:00:00",
+  "cli_version": "1.5.0-alpha.6"
+}
